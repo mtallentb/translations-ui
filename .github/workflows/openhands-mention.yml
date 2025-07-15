@@ -3,8 +3,10 @@ name: OpenHands Mention Handler
 on:
   issue_comment:
     types: [created]
-  pull_request_review_comment:
-    types: [created]
+
+permissions:
+  issues: write
+  pull-requests: write
 
 jobs:
   handle-mention:
@@ -13,43 +15,54 @@ jobs:
     
     steps:
     - name: Handle OpenHands Mention
-      uses: actions/github-script@v7
+      uses: actions/github-script@v6
       with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
         script: |
-          const comment = context.payload.comment;
-          const commentBody = comment.body;
-          
-          console.log('Comment body:', commentBody);
-          
-          // Extract the request after @openhands
-          const mentionMatch = commentBody.match(/@openhands\s+(.+)/i);
-          if (!mentionMatch) {
-            console.log('No command found after @openhands');
-            return;
+          try {
+            const comment = context.payload.comment;
+            const commentBody = comment.body;
+            
+            console.log('Comment body:', commentBody);
+            console.log('Issue number:', context.issue.number);
+            console.log('Repo:', context.repo.owner + '/' + context.repo.repo);
+            
+            // Extract the request after @openhands
+            const mentionMatch = commentBody.match(/@openhands\s+(.+)/i);
+            if (!mentionMatch) {
+              console.log('No command found after @openhands');
+              return;
+            }
+            
+            const request = mentionMatch[1].trim();
+            console.log('Extracted request:', request);
+            
+            // Simple command handling
+            let response = '';
+            
+            if (request.toLowerCase().includes('review')) {
+              response = '🤖 **OpenHands AI Review**\\n\\nI\\'ll analyze this PR and provide feedback. Please note: This is an automated response triggered by your mention.\\n\\n*For a comprehensive review, please use the OpenHands platform directly.*';
+            } else if (request.toLowerCase().includes('help')) {
+              response = '🤖 **OpenHands Help**\\n\\nAvailable commands:\\n- `@openhands review` - Request a code review\\n- `@openhands help` - Show this help message\\n- `@openhands status` - Check system status\\n\\n*For full AI assistance, visit the OpenHands platform.*';
+            } else if (request.toLowerCase().includes('status')) {
+              response = '🤖 **OpenHands Status**\\n\\n✅ GitHub Actions integration: Active\\n✅ Mention detection: Working\\n⚠️ Full AI capabilities: Available on OpenHands platform\\n\\nLast updated: ' + new Date().toISOString();
+            } else {
+              response = '🤖 **OpenHands**\\n\\nI received your message: "' + request + '"\\n\\nFor full AI assistance with code review, debugging, and development tasks, please use the OpenHands platform directly.\\n\\nType `@openhands help` for available commands.';
+            }
+            
+            console.log('Posting response:', response);
+            
+            // Post the response
+            const result = await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: response
+            });
+            
+            console.log('Comment posted successfully:', result.data.html_url);
+            
+          } catch (error) {
+            console.error('Error in workflow:', error);
+            throw error;
           }
-          
-          const request = mentionMatch[1].trim();
-          console.log('Extracted request:', request);
-          
-          // Simple command handling
-          let response = '';
-          
-          if (request.toLowerCase().includes('review')) {
-            response = `🤖 **OpenHands AI Review**\n\nI'll analyze this PR and provide feedback. Please note: This is an automated response triggered by your mention.\n\n*For a comprehensive review, please use the OpenHands platform directly.*`;
-          } else if (request.toLowerCase().includes('help')) {
-            response = `🤖 **OpenHands Help**\n\nAvailable commands:\n- \`@openhands review\` - Request a code review\n- \`@openhands help\` - Show this help message\n- \`@openhands status\` - Check system status\n\n*For full AI assistance, visit the OpenHands platform.*`;
-          } else if (request.toLowerCase().includes('status')) {
-            response = `🤖 **OpenHands Status**\n\n✅ GitHub Actions integration: Active\n✅ Mention detection: Working\n⚠️ Full AI capabilities: Available on OpenHands platform\n\nLast updated: ${new Date().toISOString()}`;
-          } else {
-            response = `🤖 **OpenHands**\n\nI received your message: "${request}"\n\nFor full AI assistance with code review, debugging, and development tasks, please use the OpenHands platform directly.\n\nType \`@openhands help\` for available commands.`;
-          }
-          
-          console.log('Posting response:', response);
-          
-          // Post the response
-          await github.rest.issues.createComment({
-            owner: context.repo.owner,
-            repo: context.repo.repo,
-            issue_number: context.issue.number,
-            body: response
-          });
