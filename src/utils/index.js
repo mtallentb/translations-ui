@@ -3,8 +3,9 @@
 //
 // Planned utilities:
 // - validationUtils.js - Translation key and value validation
-// - searchUtils.js - Search and filtering functionality
-// - stateUtils.js - State manipulation helpers
+// - searchUtils.js - Search and filtering functionality ✅
+// - stateUtils.js - State manipulation helpers ✅
 // - formatUtils.js - Data formatting utilities
 
-export {};
+export * from './stateUtils.js';
+export * from './searchUtils.js';

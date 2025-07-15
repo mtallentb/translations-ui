@@ -3,8 +3,8 @@
 //
 // Planned hooks:
 // - useInlineEdit.js - Handle inline editing functionality
-// - useDebounce.js - Debounce user input
+// - useDebounce.js - Debounce user input ✅
 // - useLocalStorage.js - Local storage operations
 // - useTranslations.js - Translation data access hook
 
-export {};
+export { useDebounce } from './useDebounce.js';
