@@ -12,9 +12,6 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-      
     - name: Handle OpenHands Mention
       uses: actions/github-script@v7
       with:
@@ -22,11 +19,17 @@ jobs:
           const comment = context.payload.comment;
           const commentBody = comment.body;
           
+          console.log('Comment body:', commentBody);
+          
           // Extract the request after @openhands
           const mentionMatch = commentBody.match(/@openhands\s+(.+)/i);
-          if (!mentionMatch) return;
+          if (!mentionMatch) {
+            console.log('No command found after @openhands');
+            return;
+          }
           
           const request = mentionMatch[1].trim();
+          console.log('Extracted request:', request);
           
           // Simple command handling
           let response = '';
@@ -40,6 +43,8 @@ jobs:
           } else {
             response = `🤖 **OpenHands**\n\nI received your message: "${request}"\n\nFor full AI assistance with code review, debugging, and development tasks, please use the OpenHands platform directly.\n\nType \`@openhands help\` for available commands.`;
           }
+          
+          console.log('Posting response:', response);
           
           // Post the response
           await github.rest.issues.createComment({
