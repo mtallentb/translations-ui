@@ -9,9 +9,16 @@
   margin-bottom: 0.5rem;
 }
 
+.inputContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
 .input {
   width: 100%;
   padding: 0.75rem;
+  padding-right: 2.5rem; /* Space for clear button */
   border: 1px solid var(--border-color, #e0e0e0);
   border-radius: 4px;
   font-size: 1rem;
@@ -26,4 +33,32 @@
 
 .input::placeholder {
   color: #999;
+}
+
+.clearButton {
+  position: absolute;
+  right: 0.5rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #999;
+  cursor: pointer;
+  padding: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background-color 0.2s ease;
+}
+
+.clearButton:hover {
+  background-color: #f0f0f0;
+  color: #666;
+}
+
+.clearButton:focus {
+  outline: 2px solid var(--primary-color, #61dafb);
+  outline-offset: 2px;
 }
