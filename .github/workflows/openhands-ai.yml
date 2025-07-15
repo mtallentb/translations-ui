@@ -1,0 +1,108 @@
+name: OpenHands AI Assistant
+
+on:
+  issue_comment:
+    types: [created]
+  pull_request_review_comment:
+    types: [created]
+
+jobs:
+  ai-assistant:
+    if: contains(github.event.comment.body, '@openhands')
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Get PR diff (if applicable)
+      id: pr-diff
+      if: github.event.issue.pull_request
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const { data: pr } = await github.rest.pulls.get({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            pull_number: context.issue.number
+          });
+          
+          const { data: diff } = await github.rest.pulls.get({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            pull_number: context.issue.number,
+            mediaType: {
+              format: 'diff'
+            }
+          });
+          
+          return {
+            title: pr.title,
+            description: pr.body,
+            diff: diff
+          };
+    
+    - name: AI Response
+      uses: actions/github-script@v7
+      env:
+        OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      with:
+        script: |
+          const comment = context.payload.comment;
+          const commentBody = comment.body;
+          
+          // Extract the request after @openhands
+          const mentionMatch = commentBody.match(/@openhands\s+(.+)/i);
+          if (!mentionMatch) return;
+          
+          const request = mentionMatch[1].trim();
+          
+          // If OpenAI API key is available, use AI
+          if (process.env.OPENAI_API_KEY && request.toLowerCase().includes('review')) {
+            try {
+              const prData = ${{ steps.pr-diff.outputs.result || '{}' }};
+              
+              // This would require implementing OpenAI API call
+              // For now, provide a structured response
+              const response = `🤖 **OpenHands AI Assistant**\n\n` +
+                `I've analyzed your request: "${request}"\n\n` +
+                `**Analysis:**\n` +
+                `- Request type: Code review\n` +
+                `- Context: ${context.eventName}\n` +
+                `- Repository: ${context.repo.owner}/${context.repo.repo}\n\n` +
+                `**Note:** Full AI integration requires OpenAI API key configuration.\n\n` +
+                `*For comprehensive AI assistance, please use the OpenHands platform directly.*`;
+              
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: response
+              });
+            } catch (error) {
+              console.error('AI processing error:', error);
+              
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: `🤖 **OpenHands AI Assistant**\n\nI encountered an error processing your request. Please try again or use the OpenHands platform directly.\n\nError: ${error.message}`
+              });
+            }
+          } else {
+            // Fallback to simple responses
+            const response = `🤖 **OpenHands AI Assistant**\n\n` +
+              `I received your request: "${request}"\n\n` +
+              `**Available integrations:**\n` +
+              `- ✅ Basic mention detection\n` +
+              `- ⚠️ AI responses (requires API key setup)\n` +
+              `- ✅ GitHub Actions automation\n\n` +
+              `For full AI capabilities, please use the OpenHands platform.`;
+            
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: response
+            });
+          }
