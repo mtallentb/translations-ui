@@ -1,0 +1,1135 @@
+{
+  "master": {
+    "tasks": [
+      {
+        "id": 1,
+        "title": "Setup React Project with Testing Infrastructure",
+        "description": "Initialize React application using Create React App with comprehensive testing setup and CSS Modules configuration",
+        "details": "1. Run `npx create-react-app translation-management-ui`\n2. Install additional dependencies: `npm install --save-dev @testing-library/jest-dom @testing-library/user-event`\n3. Configure CSS Modules by ejecting or using CRACO\n4. Set up project structure: src/components, src/services, src/utils, src/styles\n5. Configure Jest with setupTests.js for React Testing Library\n6. Create initial .gitignore and README.md\n7. Set up ESLint and Prettier for code consistency\n8. Create basic App.js structure with routing placeholder",
+        "testStrategy": "Verify project builds successfully with `npm start` and `npm test`. Test CSS Modules work by creating a sample component with scoped styles. Ensure all testing utilities are properly configured.",
+        "priority": "high",
+        "dependencies": [],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Create React App Installation",
+            "description": "Initialize new React application using Create React App and verify basic setup",
+            "dependencies": [],
+            "details": "Run `npx create-react-app translation-management-ui` to create the base React application. Verify the installation by running `npm start` and ensuring the default React app loads successfully in the browser. Check that all core dependencies are properly installed and the development server starts without errors.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 2,
+            "title": "Install Additional Dependencies",
+            "description": "Install testing libraries, CSS Modules support, and other required dependencies",
+            "dependencies": [
+              1
+            ],
+            "details": "Install additional dependencies using `npm install --save-dev @testing-library/jest-dom @testing-library/user-event @craco/craco` for enhanced testing capabilities. Install CSS Modules support and any other required packages for the project. Update package.json scripts to use CRACO for configuration overrides.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 3,
+            "title": "Configure Build Tools and CSS Modules",
+            "description": "Set up CRACO configuration for CSS Modules and customize build process",
+            "dependencies": [
+              2
+            ],
+            "details": "Create craco.config.js to enable CSS Modules without ejecting. Configure CSS Modules to work with .module.css files. Set up any additional webpack configurations needed for the project. Test that CSS Modules are working by creating a sample component with scoped styles.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 4,
+            "title": "Create Project Directory Structure",
+            "description": "Establish organized folder structure for components, services, utilities, and styles",
+            "dependencies": [
+              3
+            ],
+            "details": "Create the following directory structure: src/components for React components, src/services for API and data services, src/utils for utility functions, src/styles for global styles, src/hooks for custom hooks, and src/context for React context providers. Remove default CRA files and organize the project structure.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 5,
+            "title": "Configure Testing Environment",
+            "description": "Set up Jest configuration and React Testing Library for comprehensive testing",
+            "dependencies": [
+              4
+            ],
+            "details": "Configure Jest with setupTests.js file to include React Testing Library utilities. Set up custom render functions and testing utilities. Configure test coverage reporting and ensure all testing libraries are properly integrated. Create initial test files to verify the testing setup works correctly.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 6,
+            "title": "Setup Code Quality Tools",
+            "description": "Configure ESLint, Prettier, and Git hooks for code consistency and quality",
+            "dependencies": [
+              5
+            ],
+            "details": "Install and configure ESLint with React-specific rules and Prettier for code formatting. Set up .eslintrc.js and .prettierrc configuration files. Configure pre-commit hooks using husky to run linting and formatting checks. Create .gitignore file with appropriate exclusions for React projects.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 7,
+            "title": "Create Basic App Structure",
+            "description": "Build the main App component structure and routing foundation",
+            "dependencies": [
+              6
+            ],
+            "details": "Create the main App.js component with basic structure and routing setup if needed. Implement the main layout components and establish the component hierarchy. Set up any global providers or context that will be used throughout the application. Create a basic header and main content area structure.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 8,
+            "title": "Scaffold Initial Components",
+            "description": "Create placeholder components and establish component architecture patterns",
+            "dependencies": [
+              7
+            ],
+            "details": "Create initial placeholder components for the main features: TranslationGrid, LocaleSelector, SearchInput, and other core components. Establish consistent component patterns and prop interfaces. Create basic CSS Module files for each component. Set up component exports and imports to ensure the application builds successfully.",
+            "status": "pending",
+            "testStrategy": ""
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Implement Translation Data Models and State Management",
+        "description": "Create translation data structures and in-memory state management system following the specified data models",
+        "details": "1. Create src/models/Translation.js with Translation object structure:\n```javascript\nconst Translation = {\n  key: string,\n  base: string,\n  locales: { 'en-us': string, 'zh-tw': string, ... },\n  modified: boolean,\n  created: timestamp,\n  updated: timestamp\n}\n```\n2. Implement src/store/translationStore.js using React Context and useReducer\n3. Create AppState structure with translations array, selectedLocale, searchQuery, modifiedKeys Set\n4. Implement reducer actions: ADD_TRANSLATION, UPDATE_TRANSLATION, DELETE_TRANSLATION, SET_LOCALE, SET_SEARCH\n5. Add utility functions for translation manipulation\n6. Create mock data with sample translations for development",
+        "testStrategy": "Unit tests for data model validation, state reducer functions, and utility methods. Test state transitions and immutability. Verify mock data loads correctly.",
+        "priority": "high",
+        "dependencies": [
+          1
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Create Translation Data Models",
+            "description": "Design and implement the core Translation data structure with proper typing and validation",
+            "dependencies": [],
+            "details": "Create src/models/Translation.js with Translation object structure including key, base, locales, modified, created, and updated fields. Implement validation functions for data integrity and helper methods for translation manipulation. Define TypeScript interfaces or PropTypes for type safety.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 2,
+            "title": "Set up React Context API Structure",
+            "description": "Establish the Context API foundation for global state management",
+            "dependencies": [
+              1
+            ],
+            "details": "Create src/store/TranslationContext.js with React Context setup. Define the context provider component with proper TypeScript types. Set up the context consumer hooks and establish the provider wrapper structure for the application.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 3,
+            "title": "Implement State Reducer Logic",
+            "description": "Build the reducer function to handle all state transitions and mutations",
+            "dependencies": [
+              1,
+              2
+            ],
+            "details": "Create src/store/translationReducer.js with comprehensive reducer implementation. Handle actions like ADD_TRANSLATION, UPDATE_TRANSLATION, DELETE_TRANSLATION, SET_SEARCH_QUERY, SET_SELECTED_LOCALE, MARK_MODIFIED, SAVE_CHANGES, CANCEL_CHANGES. Ensure immutable state updates and proper error handling.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 4,
+            "title": "Create Action Creators",
+            "description": "Develop action creator functions for consistent state updates",
+            "dependencies": [
+              3
+            ],
+            "details": "Create src/store/actions.js with action creator functions for all reducer actions. Implement async action creators for API calls, batch operations for bulk updates, and validation logic within actions. Include proper error handling and loading states.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 5,
+            "title": "Implement State Utility Functions",
+            "description": "Build helper functions for state manipulation and data processing",
+            "dependencies": [
+              1,
+              3
+            ],
+            "details": "Create src/utils/stateUtils.js with utility functions for filtering translations, searching across locales, change detection, data validation, and state normalization. Implement performance-optimized functions for large datasets and memoization where appropriate.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 6,
+            "title": "Generate Mock Data and Initial State",
+            "description": "Create comprehensive mock data for development and testing",
+            "dependencies": [
+              1
+            ],
+            "details": "Create src/data/mockTranslations.js with realistic translation data across multiple locales. Generate initial state structure with sample translations, default locale settings, and various modification states. Include edge cases and different data scenarios for thorough testing.",
+            "status": "pending",
+            "testStrategy": ""
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "Create Grid Component and Locale Selector",
+        "description": "Build the foundational UI components including the translation grid and locale dropdown selector",
+        "details": "1. Create src/components/TranslationGrid.js with table structure\n2. Implement columns for key, base value, and selected locale translation\n3. Use CSS Modules for grid styling with responsive design\n4. Create src/components/LocaleSelector.js dropdown component\n5. Support locale codes: en-us, zh-tw, ja-jp, ko-kr, es-es, fr-fr, de-de\n6. Implement grid row rendering with proper key props\n7. Add loading states and empty state handling\n8. Connect components to translation store context\n9. Ensure accessibility with proper ARIA labels and keyboard navigation",
+        "testStrategy": "Test grid renders translations correctly, locale selector updates grid columns, responsive design works on different screen sizes. Test keyboard navigation and screen reader compatibility.",
+        "priority": "high",
+        "dependencies": [
+          2
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Create Grid Structure Foundation",
+            "description": "Build the basic HTML table structure for the translation grid with proper semantic markup and table headers",
+            "dependencies": [],
+            "details": "Create TranslationGrid.js component with table element, thead, tbody structure. Implement column headers for key, base value, and selected locale translation. Add proper table accessibility attributes including role, aria-label, and scope attributes for headers.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 2,
+            "title": "Implement Responsive Grid Styling",
+            "description": "Create CSS Modules styling for the grid with responsive design that adapts to different screen sizes",
+            "dependencies": [
+              1
+            ],
+            "details": "Create TranslationGrid.module.css with responsive table styles. Implement mobile-first approach with breakpoints for tablet and desktop. Add horizontal scrolling for mobile devices, proper column sizing, and hover states. Include loading and empty state styling.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 3,
+            "title": "Build Locale Selector Component",
+            "description": "Create dropdown component for locale selection with support for all required language codes",
+            "dependencies": [],
+            "details": "Create LocaleSelector.js component with dropdown functionality. Support locale codes: en-us, zh-tw, ja-jp, ko-kr, es-es, fr-fr, de-de. Implement proper option labeling with language names and flags. Add keyboard navigation support and proper ARIA attributes.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 4,
+            "title": "Implement Accessibility Features",
+            "description": "Add comprehensive accessibility support including keyboard navigation, screen reader compatibility, and ARIA attributes",
+            "dependencies": [
+              1,
+              3
+            ],
+            "details": "Add ARIA labels, roles, and descriptions to grid and selector components. Implement keyboard navigation with tab order, arrow key navigation for grid cells. Add focus management and screen reader announcements for dynamic content updates. Ensure color contrast compliance.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 5,
+            "title": "Create Translation Context Integration",
+            "description": "Connect grid and locale selector components to the translation store context for data management",
+            "dependencies": [
+              1,
+              3
+            ],
+            "details": "Integrate components with translation context using useContext hook. Implement data fetching and state synchronization. Add error handling for context operations and loading states. Ensure proper re-rendering when translation data changes.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 6,
+            "title": "Implement State Management Connections",
+            "description": "Connect components to global state management for locale selection and grid data updates",
+            "dependencies": [
+              5
+            ],
+            "details": "Implement state management connections for locale selection changes. Add grid data filtering based on selected locale. Implement optimistic updates for better user experience. Add state persistence for selected locale across sessions.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 7,
+            "title": "Add Grid Row Rendering Logic",
+            "description": "Implement dynamic row rendering with proper key props and data mapping from translation store",
+            "dependencies": [
+              2,
+              6
+            ],
+            "details": "Create row rendering logic that maps translation data to table rows. Implement proper React key props for performance. Add conditional rendering for empty states and loading indicators. Include row selection functionality and hover effects.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 8,
+            "title": "Implement Loading and Empty States",
+            "description": "Add comprehensive loading states and empty state handling for both grid and locale selector components",
+            "dependencies": [
+              7
+            ],
+            "details": "Create loading skeleton components for grid rows during data fetching. Implement empty state with helpful messaging and call-to-action buttons. Add error state handling with retry functionality. Include loading indicators for locale switching operations.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 9,
+            "title": "Integrate Component Testing and Validation",
+            "description": "Ensure all components work together seamlessly with proper testing coverage and validation",
+            "dependencies": [
+              4,
+              8
+            ],
+            "details": "Test grid renders translations correctly with different locales. Validate locale selector updates grid columns appropriately. Test responsive design across different screen sizes. Verify keyboard navigation and screen reader compatibility. Add integration tests for context and state management.",
+            "status": "pending",
+            "testStrategy": ""
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "title": "Implement Search Functionality",
+        "description": "Add real-time search capability across translation keys, base values, and translated values",
+        "details": "1. Create src/components/SearchInput.js with debounced input\n2. Implement search logic in src/utils/searchUtils.js:\n```javascript\nconst filterTranslations = (translations, query, selectedLocale) => {\n  return translations.filter(t => \n    t.key.toLowerCase().includes(query.toLowerCase()) ||\n    t.base.toLowerCase().includes(query.toLowerCase()) ||\n    (t.locales[selectedLocale] && t.locales[selectedLocale].toLowerCase().includes(query.toLowerCase()))\n  )\n}\n```\n3. Add search highlighting functionality\n4. Connect search to translation store with SET_SEARCH action\n5. Implement search result count display\n6. Add clear search functionality\n7. Optimize search performance with memoization",
+        "testStrategy": "Test search filters correctly across all fields, highlighting works, debouncing prevents excessive filtering, search state persists during locale changes. Performance test with large datasets.",
+        "priority": "medium",
+        "dependencies": [
+          3
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Create Search Input Component",
+            "description": "Build the SearchInput component with proper styling and event handling",
+            "dependencies": [],
+            "details": "Create src/components/SearchInput.js with input field, search icon, clear button, and proper accessibility attributes. Include CSS Modules styling for consistent appearance and responsive design.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 2,
+            "title": "Implement Debouncing Logic",
+            "description": "Add debouncing mechanism to prevent excessive search operations",
+            "dependencies": [
+              1
+            ],
+            "details": "Implement useDebounce hook or integrate debouncing directly into SearchInput component. Set appropriate delay (300-500ms) to balance responsiveness with performance.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 3,
+            "title": "Develop Search Algorithm",
+            "description": "Create search utility functions for filtering translations",
+            "dependencies": [],
+            "details": "Implement src/utils/searchUtils.js with filterTranslations function that searches across translation keys, base values, and locale-specific translations. Include case-insensitive matching and partial string matching.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 4,
+            "title": "Implement Search Result Highlighting",
+            "description": "Add highlighting logic to emphasize search matches in results",
+            "dependencies": [
+              3
+            ],
+            "details": "Create highlighting utility functions that wrap matched text in highlight spans. Implement proper escaping for HTML content and ensure highlighting works across all searchable fields.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 5,
+            "title": "Optimize Search Performance",
+            "description": "Implement performance optimizations for large datasets",
+            "dependencies": [
+              3
+            ],
+            "details": "Add memoization for search results, implement virtual scrolling if needed, and optimize filtering algorithms. Consider indexing strategies for improved search performance with large translation sets.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 6,
+            "title": "Integrate Search State Management",
+            "description": "Connect search functionality to the application state system",
+            "dependencies": [
+              2,
+              3
+            ],
+            "details": "Update translation store to include searchQuery state, implement search actions in reducer, and ensure search state persists during locale changes. Connect SearchInput component to global state.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 7,
+            "title": "Complete Search Integration and Testing",
+            "description": "Finalize search functionality integration with grid component and comprehensive testing",
+            "dependencies": [
+              4,
+              5,
+              6
+            ],
+            "details": "Integrate search with TranslationGrid component, ensure highlighting displays correctly in grid cells, implement search result count display, and conduct thorough testing including edge cases and performance validation.",
+            "status": "pending",
+            "testStrategy": ""
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "title": "Add Inline Editing Capabilities",
+        "description": "Implement inline editing functionality for grid cells with immediate validation feedback",
+        "details": "1. Create src/components/EditableCell.js with click-to-edit behavior\n2. Implement edit modes: display, editing, saving states\n3. Add input validation for translation values\n4. Handle Enter to save, Escape to cancel\n5. Implement optimistic updates with rollback capability\n6. Add visual indicators for modified cells (CSS classes)\n7. Create src/hooks/useInlineEdit.js custom hook\n8. Support both text input and textarea for longer translations\n9. Add auto-focus and text selection on edit start",
+        "testStrategy": "Test inline editing works for all cell types, validation prevents invalid inputs, keyboard shortcuts function correctly, visual feedback is clear. Test edge cases like empty values and special characters.",
+        "priority": "high",
+        "dependencies": [
+          4
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Create Editable Cell Component",
+            "description": "Build the core EditableCell component with click-to-edit behavior and mode switching",
+            "dependencies": [],
+            "details": "Create src/components/EditableCell.js with display/editing/saving states, click-to-edit functionality, and proper component structure for handling different cell types",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 2,
+            "title": "Implement Edit State Management",
+            "description": "Build state management system for tracking edit modes and cell values",
+            "dependencies": [
+              1
+            ],
+            "details": "Implement state management for edit modes (display, editing, saving), track original and current values, handle state transitions between modes",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 3,
+            "title": "Add Input Validation System",
+            "description": "Create validation logic for translation values during inline editing",
+            "dependencies": [
+              2
+            ],
+            "details": "Implement validation rules for translation inputs, handle validation errors, provide real-time feedback during editing, prevent invalid submissions",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 4,
+            "title": "Implement Keyboard Handling",
+            "description": "Add keyboard shortcuts and navigation for inline editing",
+            "dependencies": [
+              2
+            ],
+            "details": "Handle Enter to save, Escape to cancel, Tab navigation, auto-focus on edit start, text selection behavior, keyboard accessibility",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 5,
+            "title": "Build Optimistic Updates System",
+            "description": "Implement optimistic updates with rollback capability for smooth UX",
+            "dependencies": [
+              3,
+              4
+            ],
+            "details": "Create optimistic update mechanism, implement rollback on failure, handle concurrent edits, maintain data consistency during updates",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 6,
+            "title": "Add Visual Feedback System",
+            "description": "Create visual indicators and feedback for editing states and modifications",
+            "dependencies": [
+              2
+            ],
+            "details": "Add CSS classes for modified cells, loading indicators during saves, error state styling, hover effects, focus indicators",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 7,
+            "title": "Create useInlineEdit Custom Hook",
+            "description": "Build reusable custom hook for inline editing functionality",
+            "dependencies": [
+              5,
+              6
+            ],
+            "details": "Create src/hooks/useInlineEdit.js with edit state management, validation handling, keyboard events, optimistic updates logic",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 8,
+            "title": "Implement Input Type Support",
+            "description": "Add support for different input types (text input and textarea)",
+            "dependencies": [
+              7
+            ],
+            "details": "Support both text input for short translations and textarea for longer content, auto-resize functionality, proper input selection",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 9,
+            "title": "Integrate with Translation Grid",
+            "description": "Connect inline editing components with the main translation grid",
+            "dependencies": [
+              8
+            ],
+            "details": "Integrate EditableCell with TranslationGrid component, handle grid updates, maintain row selection, ensure proper data flow",
+            "status": "pending",
+            "testStrategy": ""
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "title": "Implement Change Tracking and Save/Cancel Workflow",
+        "description": "Build comprehensive change tracking system with save/cancel functionality and visual feedback",
+        "details": "1. Enhance translation store to track modified keys in Set\n2. Create src/components/SaveCancelBar.js with action buttons\n3. Implement change detection logic:\n```javascript\nconst hasChanges = (original, current) => {\n  return JSON.stringify(original) !== JSON.stringify(current)\n}\n```\n4. Add visual indicators for modified rows/cells\n5. Implement bulk save functionality with API simulation\n6. Add cancel/revert functionality to restore original values\n7. Create confirmation dialogs for destructive actions\n8. Add keyboard shortcuts (Ctrl+S for save, Ctrl+Z for undo)\n9. Implement auto-save draft functionality using localStorage",
+        "testStrategy": "Test change tracking accurately identifies modifications, save/cancel operations work correctly, visual feedback is intuitive, keyboard shortcuts function properly. Test data persistence and recovery.",
+        "priority": "high",
+        "dependencies": [
+          5
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Implement Modification Detection System",
+            "description": "Create core change detection logic to track modifications in translation data",
+            "dependencies": [],
+            "details": "Implement hasChanges utility function, create modification tracking in translation store using Set for modified keys, add comparison logic for original vs current values, and integrate with existing state management system",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 2,
+            "title": "Create Visual Indicators for Modified Content",
+            "description": "Build visual feedback system to highlight modified translations and cells",
+            "dependencies": [
+              1
+            ],
+            "details": "Add CSS classes for modified states, implement row highlighting for changed translations, create cell-level indicators for modified values, add visual cues in translation table, and ensure accessibility compliance",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 3,
+            "title": "Build Save/Cancel UI Components",
+            "description": "Create SaveCancelBar component with action buttons and status display",
+            "dependencies": [
+              1
+            ],
+            "details": "Implement src/components/SaveCancelBar.js with save/cancel buttons, add modification count display, create loading states for save operations, implement button states based on change status, and add keyboard shortcut indicators",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 4,
+            "title": "Implement Bulk Save Operations",
+            "description": "Create bulk save functionality to persist multiple changes simultaneously",
+            "dependencies": [
+              1,
+              3
+            ],
+            "details": "Implement bulk save logic with API simulation, add progress indicators for large save operations, create error handling for failed saves, implement optimistic updates, and add rollback functionality for failed operations",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 5,
+            "title": "Build Confirmation Dialog System",
+            "description": "Create reusable confirmation dialogs for destructive operations",
+            "dependencies": [
+              3
+            ],
+            "details": "Implement src/components/ConfirmationDialog.js modal component, create different dialog types for save/cancel/discard operations, add customizable message content, implement promise-based confirmation flow, and ensure proper focus management",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 6,
+            "title": "Implement Keyboard Shortcuts",
+            "description": "Add keyboard shortcuts for save, cancel, and other change tracking operations",
+            "dependencies": [
+              3,
+              5
+            ],
+            "details": "Implement Ctrl+S for save, Ctrl+Z for cancel/undo, Escape for cancel operations, add keyboard event listeners with proper cleanup, create shortcut help display, and ensure shortcuts work across different components",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 7,
+            "title": "Create Auto-Save Functionality",
+            "description": "Implement automatic saving of changes with configurable intervals",
+            "dependencies": [
+              1,
+              4
+            ],
+            "details": "Add auto-save timer with configurable intervals, implement debounced auto-save to prevent excessive saves, create auto-save status indicators, add user preferences for auto-save settings, and handle auto-save conflicts with manual saves",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 8,
+            "title": "Implement Cancel/Revert Operations",
+            "description": "Build functionality to cancel changes and revert to original values",
+            "dependencies": [
+              1,
+              5
+            ],
+            "details": "Implement revert logic to restore original translation values, create selective revert for individual changes, add bulk revert functionality, implement confirmation dialogs for revert operations, and ensure proper state cleanup after revert",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 9,
+            "title": "Build Change History Tracking",
+            "description": "Create system to track and display change history for translations",
+            "dependencies": [
+              1,
+              2
+            ],
+            "details": "Implement change history data structure, create history display component, add timestamps for modifications, implement change comparison view, and create history navigation functionality",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 10,
+            "title": "Integrate Change Tracking with Translation Table",
+            "description": "Connect all change tracking components with the main translation interface",
+            "dependencies": [
+              2,
+              3,
+              4,
+              6,
+              7,
+              8
+            ],
+            "details": "Integrate SaveCancelBar with translation table, connect visual indicators to table rows and cells, implement change tracking in inline editing, add change status to table headers, and ensure seamless user experience across all components",
+            "status": "pending",
+            "testStrategy": ""
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "title": "Create Key Validation System",
+        "description": "Implement real-time validation for translation keys including duplicate detection and format validation",
+        "details": "1. Create src/utils/validationUtils.js with validation functions:\n```javascript\nconst validateKey = (key, existingKeys) => {\n  const errors = []\n  if (!key || key.trim() === '') errors.push('Key is required')\n  if (existingKeys.includes(key)) errors.push('Key already exists')\n  if (!/^[a-z0-9-]+$/.test(key)) errors.push('Use kebab-case format')\n  return errors\n}\n```\n2. Implement real-time validation in EditableCell component\n3. Add validation error display with tooltips\n4. Create src/components/ValidationMessage.js for error display\n5. Follow naming convention: category-subcategory-item pattern\n6. Add validation for base and locale values (non-empty)\n7. Implement validation state in translation store\n8. Add bulk validation for import operations",
+        "testStrategy": "Test key uniqueness validation, format validation follows kebab-case rules, error messages are clear and helpful, validation runs in real-time without performance issues. Test edge cases and special characters.",
+        "priority": "medium",
+        "dependencies": [
+          6
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Create Core Validation Utility Functions",
+            "description": "Implement comprehensive validation functions for translation keys, values, and formats in a centralized utility module",
+            "dependencies": [],
+            "details": "Create src/utils/validationUtils.js with functions: validateKey() for key format and uniqueness, validateTranslationValue() for content validation, validateBulkData() for batch operations, and formatValidationErrors() for consistent error messaging. Include regex patterns for kebab-case validation and duplicate detection logic.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 2,
+            "title": "Implement Real-time Validation Integration",
+            "description": "Integrate validation functions into components with real-time feedback and debounced validation triggers",
+            "dependencies": [
+              1
+            ],
+            "details": "Add validation hooks to EditableCell and form components with debounced validation (300ms delay). Implement useValidation custom hook for state management. Connect validation to user input events with immediate feedback for critical errors and delayed feedback for format validation.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 3,
+            "title": "Build Error Display Components",
+            "description": "Create reusable components for displaying validation errors with tooltips, inline messages, and form-level error summaries",
+            "dependencies": [
+              1
+            ],
+            "details": "Create src/components/ValidationError.js for inline error display, ValidationTooltip.js for hover/focus error details, and ErrorSummary.js for form-level error aggregation. Include proper ARIA attributes for accessibility and consistent styling with error severity levels.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 4,
+            "title": "Implement Validation State Management",
+            "description": "Create centralized validation state management system to track validation status across components",
+            "dependencies": [
+              1,
+              2
+            ],
+            "details": "Develop src/hooks/useValidationState.js for managing validation state, error tracking, and validation status. Implement validation context provider for sharing validation state between components. Include methods for clearing errors, batch validation, and validation state persistence.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 5,
+            "title": "Create Bulk Validation Features",
+            "description": "Implement validation capabilities for bulk operations including CSV import validation and batch key validation",
+            "dependencies": [
+              1,
+              4
+            ],
+            "details": "Create src/utils/bulkValidationUtils.js with functions for validating CSV data, batch key uniqueness checking, and bulk error reporting. Implement progress tracking for large validation operations and provide detailed validation reports with line-by-line error information.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 6,
+            "title": "Integrate Validation with Form Components",
+            "description": "Connect validation system to AddTranslationForm and EditableCell components with proper error handling",
+            "dependencies": [
+              2,
+              3,
+              4
+            ],
+            "details": "Modify AddTranslationForm to use validation hooks and display validation errors. Update EditableCell component to show real-time validation feedback. Implement form submission prevention when validation errors exist and provide clear user guidance for error resolution.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 7,
+            "title": "Add Validation Performance Optimization",
+            "description": "Optimize validation performance for large datasets and implement caching mechanisms for validation results",
+            "dependencies": [
+              4,
+              5
+            ],
+            "details": "Implement validation result caching, debounced validation for real-time feedback, and lazy validation for non-critical fields. Add performance monitoring for validation operations and optimize duplicate key checking with efficient data structures like Sets or Maps.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 8,
+            "title": "Create Validation Testing Suite",
+            "description": "Develop comprehensive tests for all validation functionality including edge cases and performance scenarios",
+            "dependencies": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "details": "Create test files for validationUtils.test.js, validation component tests, and integration tests for real-time validation. Include tests for edge cases like special characters, empty values, duplicate detection, and bulk validation performance. Add accessibility tests for error display components.",
+            "status": "pending",
+            "testStrategy": ""
+          }
+        ]
+      },
+      {
+        "id": 8,
+        "title": "Build New Translation Creation Form",
+        "description": "Create interface for adding new translation entries with comprehensive validation",
+        "details": "1. Create src/components/AddTranslationForm.js modal component\n2. Implement form fields: key input, base value, locale-specific inputs\n3. Add form validation using validation utils from task 7\n4. Implement form submission with optimistic updates\n5. Create src/components/Modal.js reusable modal wrapper\n6. Add form reset functionality after successful creation\n7. Implement tab navigation between form fields\n8. Add bulk creation option for multiple keys\n9. Connect form to translation store ADD_TRANSLATION action\n10. Add success/error feedback with toast notifications",
+        "testStrategy": "Test form validation prevents invalid submissions, new translations are added correctly, modal behavior is intuitive, form resets properly. Test accessibility and keyboard navigation.",
+        "priority": "medium",
+        "dependencies": [
+          7
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Create Modal Component Wrapper",
+            "description": "Build reusable Modal.js component with overlay, close functionality, and proper z-index management",
+            "dependencies": [],
+            "details": "Create src/components/Modal.js with backdrop click to close, ESC key handling, focus trap, and portal rendering. Include CSS for overlay and modal positioning.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 2,
+            "title": "Implement Form Field Components",
+            "description": "Create individual form field components for key input, base value, and locale-specific translation inputs",
+            "dependencies": [],
+            "details": "Build FormField.js, TextInput.js, and TextArea.js components with proper labeling, placeholder text, and controlled input handling. Support both single-line and multi-line inputs.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 3,
+            "title": "Integrate Form Validation System",
+            "description": "Connect validation utilities to form fields with real-time validation feedback and error display",
+            "dependencies": [
+              2
+            ],
+            "details": "Use validation utils from task 7 to validate translation keys, prevent duplicates, and ensure required fields. Display validation errors inline with appropriate styling.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 4,
+            "title": "Build Main Form Component Structure",
+            "description": "Create AddTranslationForm.js with form layout, field organization, and state management",
+            "dependencies": [
+              1,
+              2
+            ],
+            "details": "Implement form component with proper form structure, field grouping, and local state management using useState. Include form title and action buttons.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 5,
+            "title": "Implement Form Submission Handler",
+            "description": "Create submission logic with optimistic updates, error handling, and success feedback",
+            "dependencies": [
+              3,
+              4
+            ],
+            "details": "Handle form submission with validation checks, connect to translation store ADD_TRANSLATION action, implement optimistic UI updates, and handle submission errors gracefully.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 6,
+            "title": "Add Bulk Creation Features",
+            "description": "Implement bulk creation option allowing multiple translation keys to be added simultaneously",
+            "dependencies": [
+              5
+            ],
+            "details": "Add toggle for bulk mode, dynamic form fields for multiple entries, batch validation, and bulk submission handling. Include add/remove row functionality.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 7,
+            "title": "Implement Keyboard Navigation and Accessibility",
+            "description": "Add comprehensive keyboard navigation, ARIA labels, and accessibility features throughout the form",
+            "dependencies": [
+              4
+            ],
+            "details": "Implement tab navigation between fields, ARIA labels for screen readers, focus management, keyboard shortcuts for form actions, and proper semantic HTML structure.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 8,
+            "title": "Create Form Reset and Cancel Functionality",
+            "description": "Implement form reset after successful submission and cancel functionality with confirmation",
+            "dependencies": [
+              5
+            ],
+            "details": "Add form reset logic, clear all fields after successful creation, implement cancel button with unsaved changes confirmation, and restore form to initial state.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 9,
+            "title": "Build Notification System Integration",
+            "description": "Integrate success and error notifications for form actions with proper timing and positioning",
+            "dependencies": [
+              5
+            ],
+            "details": "Create notification components for success/error messages, implement auto-dismiss timers, position notifications appropriately, and ensure they don't interfere with form interaction.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 10,
+            "title": "Add Form Enhancement Features",
+            "description": "Implement additional form enhancements like auto-save drafts, field validation indicators, and submission loading states",
+            "dependencies": [
+              7,
+              8,
+              9
+            ],
+            "details": "Add loading spinners during submission, visual indicators for field validation status, auto-save draft functionality, and form state persistence across modal close/open cycles.",
+            "status": "pending",
+            "testStrategy": ""
+          }
+        ]
+      },
+      {
+        "id": 9,
+        "title": "Implement JSON Import Functionality",
+        "description": "Build file upload and import system for bulk translation management with validation and preview",
+        "details": "1. Create src/components/ImportModal.js with file upload interface\n2. Implement src/services/importService.js:\n```javascript\nconst processImportFile = async (file) => {\n  const content = await file.text()\n  const data = JSON.parse(content)\n  return validateImportData(data)\n}\n```\n3. Add file validation for JSON format and structure\n4. Create import preview showing changes to be made\n5. Implement conflict resolution for duplicate keys\n6. Add progress indicator for large imports\n7. Create src/components/ImportPreview.js for review before applying\n8. Support both full replacement and merge strategies\n9. Add error handling for malformed files\n10. Implement rollback functionality for failed imports",
+        "testStrategy": "Test file upload accepts only JSON files, import validation catches format errors, preview accurately shows changes, conflict resolution works correctly. Test with various file sizes and formats.",
+        "priority": "medium",
+        "dependencies": [
+          8
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Create File Upload UI Component",
+            "description": "Build the file upload interface with drag-and-drop functionality, file type validation, and visual feedback for the import modal",
+            "dependencies": [],
+            "details": "Create src/components/FileUpload.js with drag-and-drop zone, file selection button, file type filtering for JSON only, visual feedback for drag states, and file size validation. Include proper accessibility attributes and keyboard navigation support.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 2,
+            "title": "Implement File Processing Service",
+            "description": "Create the core service for reading, parsing, and processing uploaded JSON files with proper error handling",
+            "dependencies": [
+              1
+            ],
+            "details": "Implement src/services/fileProcessor.js with functions to read file content, parse JSON safely, handle encoding issues, and process large files efficiently. Include memory management for large imports and streaming capabilities if needed.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 3,
+            "title": "Build Validation Logic System",
+            "description": "Create comprehensive validation system for import data structure, format, and content validation",
+            "dependencies": [
+              2
+            ],
+            "details": "Implement src/utils/importValidation.js with schema validation, data type checking, required field validation, locale format validation, and translation key format validation. Include detailed error reporting with line numbers and specific validation failures.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 4,
+            "title": "Create Import Preview Component",
+            "description": "Build preview interface showing changes to be made, new translations, and modifications before import execution",
+            "dependencies": [
+              3
+            ],
+            "details": "Create src/components/ImportPreview.js with tabular display of changes, categorized sections for new/updated/conflicting translations, diff visualization for existing translations, and summary statistics of import impact.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 5,
+            "title": "Implement Conflict Resolution System",
+            "description": "Build conflict detection and resolution interface for handling duplicate keys and translation conflicts",
+            "dependencies": [
+              4
+            ],
+            "details": "Create src/components/ConflictResolver.js with conflict detection logic, resolution options (keep existing, use new, merge), batch resolution capabilities, and visual diff display for conflicting translations.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 6,
+            "title": "Build Progress Indicator System",
+            "description": "Create progress tracking and visual feedback system for import operations with cancellation support",
+            "dependencies": [
+              2
+            ],
+            "details": "Implement src/components/ImportProgress.js with progress bar, percentage display, current operation status, estimated time remaining, and cancel functionality. Include progress tracking for file reading, validation, and data processing phases.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 7,
+            "title": "Implement Error Handling Framework",
+            "description": "Create comprehensive error handling system with user-friendly error messages and recovery options",
+            "dependencies": [
+              3,
+              6
+            ],
+            "details": "Build src/utils/importErrorHandler.js with error categorization, user-friendly error messages, error recovery suggestions, detailed error logging, and retry mechanisms for recoverable errors.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 8,
+            "title": "Create Import Modal Container",
+            "description": "Build the main import modal component that orchestrates all import functionality components",
+            "dependencies": [
+              1,
+              4,
+              5,
+              6,
+              7
+            ],
+            "details": "Create src/components/ImportModal.js as the main container component that manages import workflow states, coordinates between upload, validation, preview, and conflict resolution components, and handles modal lifecycle.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 9,
+            "title": "Implement Import Service Integration",
+            "description": "Create the main import service that integrates all components and manages the complete import workflow",
+            "dependencies": [
+              2,
+              3,
+              5,
+              7
+            ],
+            "details": "Implement src/services/importService.js with complete import workflow orchestration, state management during import process, integration with translation store, and rollback capabilities for failed imports.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 10,
+            "title": "Add Import Success and Cleanup Handling",
+            "description": "Implement post-import success handling, cleanup operations, and user feedback for completed imports",
+            "dependencies": [
+              8,
+              9
+            ],
+            "details": "Create success notification system, cleanup temporary data, update translation store with imported data, provide import summary with statistics, and reset import modal state for subsequent imports.",
+            "status": "pending",
+            "testStrategy": ""
+          }
+        ]
+      },
+      {
+        "id": 10,
+        "title": "Performance Optimization and Error Handling",
+        "description": "Optimize application performance for large datasets and implement comprehensive error handling",
+        "details": "1. Implement virtual scrolling in TranslationGrid for large datasets:\n```javascript\nimport { FixedSizeList as List } from 'react-window'\n```\n2. Add React.memo and useMemo optimizations for expensive operations\n3. Implement pagination as fallback for virtual scrolling\n4. Create src/components/ErrorBoundary.js for error catching\n5. Add loading states and skeleton screens\n6. Implement debounced search and validation\n7. Add error handling for API operations with retry logic\n8. Create src/hooks/useErrorHandler.js for consistent error management\n9. Implement lazy loading for locale data\n10. Add performance monitoring and metrics collection\n11. Optimize bundle size with code splitting",
+        "testStrategy": "Performance test with 1000+ translations, verify virtual scrolling works smoothly, error boundaries catch and display errors gracefully, loading states provide good UX. Test memory usage and rendering performance.",
+        "priority": "medium",
+        "dependencies": [
+          9
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Implement Virtual Scrolling for Large Datasets",
+            "description": "Set up react-window virtual scrolling in TranslationGrid component to handle large datasets efficiently",
+            "dependencies": [],
+            "details": "Install react-window and implement FixedSizeList for TranslationGrid. Create virtualized row renderer with proper height calculations. Add dynamic height support for variable content. Implement scroll position persistence and smooth scrolling behavior.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 2,
+            "title": "Add React Performance Optimizations",
+            "description": "Implement React.memo, useMemo, and useCallback optimizations for expensive operations",
+            "dependencies": [
+              1
+            ],
+            "details": "Wrap components with React.memo where appropriate. Add useMemo for expensive calculations like filtered translations. Implement useCallback for event handlers to prevent unnecessary re-renders. Optimize context providers and reduce prop drilling.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 3,
+            "title": "Create Error Boundary Component",
+            "description": "Implement comprehensive error boundary system for catching and handling React errors",
+            "dependencies": [],
+            "details": "Create ErrorBoundary component with componentDidCatch and getDerivedStateFromError. Add error logging and user-friendly error messages. Implement fallback UI components. Add error boundary at multiple levels (app, feature, component).",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 4,
+            "title": "Implement Loading States and Skeleton Screens",
+            "description": "Add comprehensive loading states and skeleton screens for better user experience",
+            "dependencies": [
+              3
+            ],
+            "details": "Create skeleton components for grid rows and cells. Implement loading spinners for async operations. Add progressive loading indicators. Create shimmer effects for skeleton screens. Handle loading states for search, import, and save operations.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 5,
+            "title": "Set Up Performance Monitoring",
+            "description": "Implement performance monitoring and profiling tools to track application metrics",
+            "dependencies": [
+              2
+            ],
+            "details": "Add React DevTools Profiler integration. Implement custom performance hooks for measuring render times. Set up Web Vitals monitoring. Create performance dashboard for tracking metrics. Add memory usage monitoring and leak detection.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 6,
+            "title": "Optimize Bundle Size and Code Splitting",
+            "description": "Implement code splitting and bundle optimization techniques to reduce initial load time",
+            "dependencies": [],
+            "details": "Set up dynamic imports for route-based code splitting. Implement lazy loading for heavy components. Optimize webpack bundle configuration. Add bundle analyzer to identify optimization opportunities. Implement tree shaking for unused code removal.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 7,
+            "title": "Implement Memory Management Strategies",
+            "description": "Add memory management techniques to prevent memory leaks and optimize memory usage",
+            "dependencies": [
+              5
+            ],
+            "details": "Implement proper cleanup in useEffect hooks. Add event listener cleanup and subscription management. Optimize large object handling and garbage collection. Implement weak references where appropriate. Add memory profiling and leak detection tools.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 8,
+            "title": "Add Debounced Search and Input Optimization",
+            "description": "Optimize search functionality with debouncing and input performance improvements",
+            "dependencies": [
+              2,
+              4
+            ],
+            "details": "Implement debounced search input to reduce API calls. Add search result caching and memoization. Optimize filter operations for large datasets. Implement search highlighting with performance considerations. Add search state management optimization.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 9,
+            "title": "Implement Error Handling with Retry Logic",
+            "description": "Add comprehensive error handling for API operations with automatic retry mechanisms",
+            "dependencies": [
+              3
+            ],
+            "details": "Create error handling service with exponential backoff retry logic. Implement network error detection and handling. Add user-friendly error messages and recovery options. Create error logging and reporting system. Implement offline mode detection and handling.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 10,
+            "title": "Optimize Rendering Performance",
+            "description": "Implement advanced rendering optimizations for smooth user experience with large datasets",
+            "dependencies": [
+              1,
+              2,
+              8
+            ],
+            "details": "Implement intersection observer for lazy rendering. Add viewport-based rendering optimizations. Optimize DOM manipulation and reduce reflows. Implement efficient diff algorithms for data updates. Add render batching and scheduling optimizations.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 11,
+            "title": "Performance Testing and Monitoring Setup",
+            "description": "Create comprehensive performance testing suite and monitoring dashboard",
+            "dependencies": [
+              5,
+              7,
+              10
+            ],
+            "details": "Set up automated performance testing with 1000+ translations. Create performance benchmarks and regression testing. Implement real-time performance monitoring dashboard. Add performance alerts and thresholds. Create performance optimization recommendations system.",
+            "status": "pending",
+            "testStrategy": ""
+          }
+        ]
+      }
+    ],
+    "metadata": {
+      "created": "2025-07-15T02:24:38.558Z",
+      "updated": "2025-07-15T02:24:38.558Z",
+      "description": "Tasks for master context"
+    }
+  }
+}

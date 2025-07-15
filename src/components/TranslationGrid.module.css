@@ -1,0 +1,19 @@
+.container {
+  background-color: #f8f9fa;
+  border: 1px solid var(--border-color, #e0e0e0);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin: 1rem 0;
+}
+
+.title {
+  margin: 0 0 1rem 0;
+  color: var(--secondary-color, #282c34);
+  font-size: 1.2rem;
+}
+
+.placeholder {
+  color: #666;
+  font-style: italic;
+  margin: 0;
+}

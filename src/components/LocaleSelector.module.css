@@ -1,0 +1,26 @@
+.container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+.label {
+  font-weight: 500;
+  color: var(--secondary-color, #282c34);
+}
+
+.select {
+  padding: 0.5rem;
+  border: 1px solid var(--border-color, #e0e0e0);
+  border-radius: 4px;
+  background-color: white;
+  font-size: 0.9rem;
+  min-width: 150px;
+}
+
+.select:focus {
+  outline: none;
+  border-color: var(--primary-color, #61dafb);
+  box-shadow: 0 0 0 2px rgba(97, 218, 251, 0.2);
+}

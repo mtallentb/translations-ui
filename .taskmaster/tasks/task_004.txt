@@ -1,0 +1,70 @@
+# Task ID: 4
+# Title: Implement Search Functionality
+# Status: pending
+# Dependencies: 3
+# Priority: medium
+# Description: Add real-time search capability across translation keys, base values, and translated values
+# Details:
+1. Create src/components/SearchInput.js with debounced input
+2. Implement search logic in src/utils/searchUtils.js:
+```javascript
+const filterTranslations = (translations, query, selectedLocale) => {
+  return translations.filter(t => 
+    t.key.toLowerCase().includes(query.toLowerCase()) ||
+    t.base.toLowerCase().includes(query.toLowerCase()) ||
+    (t.locales[selectedLocale] && t.locales[selectedLocale].toLowerCase().includes(query.toLowerCase()))
+  )
+}
+```
+3. Add search highlighting functionality
+4. Connect search to translation store with SET_SEARCH action
+5. Implement search result count display
+6. Add clear search functionality
+7. Optimize search performance with memoization
+
+# Test Strategy:
+Test search filters correctly across all fields, highlighting works, debouncing prevents excessive filtering, search state persists during locale changes. Performance test with large datasets.
+
+# Subtasks:
+## 1. Create Search Input Component [pending]
+### Dependencies: None
+### Description: Build the SearchInput component with proper styling and event handling
+### Details:
+Create src/components/SearchInput.js with input field, search icon, clear button, and proper accessibility attributes. Include CSS Modules styling for consistent appearance and responsive design.
+
+## 2. Implement Debouncing Logic [pending]
+### Dependencies: 4.1
+### Description: Add debouncing mechanism to prevent excessive search operations
+### Details:
+Implement useDebounce hook or integrate debouncing directly into SearchInput component. Set appropriate delay (300-500ms) to balance responsiveness with performance.
+
+## 3. Develop Search Algorithm [pending]
+### Dependencies: None
+### Description: Create search utility functions for filtering translations
+### Details:
+Implement src/utils/searchUtils.js with filterTranslations function that searches across translation keys, base values, and locale-specific translations. Include case-insensitive matching and partial string matching.
+
+## 4. Implement Search Result Highlighting [pending]
+### Dependencies: 4.3
+### Description: Add highlighting logic to emphasize search matches in results
+### Details:
+Create highlighting utility functions that wrap matched text in highlight spans. Implement proper escaping for HTML content and ensure highlighting works across all searchable fields.
+
+## 5. Optimize Search Performance [pending]
+### Dependencies: 4.3
+### Description: Implement performance optimizations for large datasets
+### Details:
+Add memoization for search results, implement virtual scrolling if needed, and optimize filtering algorithms. Consider indexing strategies for improved search performance with large translation sets.
+
+## 6. Integrate Search State Management [pending]
+### Dependencies: 4.2, 4.3
+### Description: Connect search functionality to the application state system
+### Details:
+Update translation store to include searchQuery state, implement search actions in reducer, and ensure search state persists during locale changes. Connect SearchInput component to global state.
+
+## 7. Complete Search Integration and Testing [pending]
+### Dependencies: 4.4, 4.5, 4.6
+### Description: Finalize search functionality integration with grid component and comprehensive testing
+### Details:
+Integrate search with TranslationGrid component, ensure highlighting displays correctly in grid cells, implement search result count display, and conduct thorough testing including edge cases and performance validation.
+

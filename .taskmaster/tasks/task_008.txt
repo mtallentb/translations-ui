@@ -1,0 +1,82 @@
+# Task ID: 8
+# Title: Build New Translation Creation Form
+# Status: pending
+# Dependencies: 7
+# Priority: medium
+# Description: Create interface for adding new translation entries with comprehensive validation
+# Details:
+1. Create src/components/AddTranslationForm.js modal component
+2. Implement form fields: key input, base value, locale-specific inputs
+3. Add form validation using validation utils from task 7
+4. Implement form submission with optimistic updates
+5. Create src/components/Modal.js reusable modal wrapper
+6. Add form reset functionality after successful creation
+7. Implement tab navigation between form fields
+8. Add bulk creation option for multiple keys
+9. Connect form to translation store ADD_TRANSLATION action
+10. Add success/error feedback with toast notifications
+
+# Test Strategy:
+Test form validation prevents invalid submissions, new translations are added correctly, modal behavior is intuitive, form resets properly. Test accessibility and keyboard navigation.
+
+# Subtasks:
+## 1. Create Modal Component Wrapper [pending]
+### Dependencies: None
+### Description: Build reusable Modal.js component with overlay, close functionality, and proper z-index management
+### Details:
+Create src/components/Modal.js with backdrop click to close, ESC key handling, focus trap, and portal rendering. Include CSS for overlay and modal positioning.
+
+## 2. Implement Form Field Components [pending]
+### Dependencies: None
+### Description: Create individual form field components for key input, base value, and locale-specific translation inputs
+### Details:
+Build FormField.js, TextInput.js, and TextArea.js components with proper labeling, placeholder text, and controlled input handling. Support both single-line and multi-line inputs.
+
+## 3. Integrate Form Validation System [pending]
+### Dependencies: 8.2
+### Description: Connect validation utilities to form fields with real-time validation feedback and error display
+### Details:
+Use validation utils from task 7 to validate translation keys, prevent duplicates, and ensure required fields. Display validation errors inline with appropriate styling.
+
+## 4. Build Main Form Component Structure [pending]
+### Dependencies: 8.1, 8.2
+### Description: Create AddTranslationForm.js with form layout, field organization, and state management
+### Details:
+Implement form component with proper form structure, field grouping, and local state management using useState. Include form title and action buttons.
+
+## 5. Implement Form Submission Handler [pending]
+### Dependencies: 8.3, 8.4
+### Description: Create submission logic with optimistic updates, error handling, and success feedback
+### Details:
+Handle form submission with validation checks, connect to translation store ADD_TRANSLATION action, implement optimistic UI updates, and handle submission errors gracefully.
+
+## 6. Add Bulk Creation Features [pending]
+### Dependencies: 8.5
+### Description: Implement bulk creation option allowing multiple translation keys to be added simultaneously
+### Details:
+Add toggle for bulk mode, dynamic form fields for multiple entries, batch validation, and bulk submission handling. Include add/remove row functionality.
+
+## 7. Implement Keyboard Navigation and Accessibility [pending]
+### Dependencies: 8.4
+### Description: Add comprehensive keyboard navigation, ARIA labels, and accessibility features throughout the form
+### Details:
+Implement tab navigation between fields, ARIA labels for screen readers, focus management, keyboard shortcuts for form actions, and proper semantic HTML structure.
+
+## 8. Create Form Reset and Cancel Functionality [pending]
+### Dependencies: 8.5
+### Description: Implement form reset after successful submission and cancel functionality with confirmation
+### Details:
+Add form reset logic, clear all fields after successful creation, implement cancel button with unsaved changes confirmation, and restore form to initial state.
+
+## 9. Build Notification System Integration [pending]
+### Dependencies: 8.5
+### Description: Integrate success and error notifications for form actions with proper timing and positioning
+### Details:
+Create notification components for success/error messages, implement auto-dismiss timers, position notifications appropriately, and ensure they don't interfere with form interaction.
+
+## 10. Add Form Enhancement Features [pending]
+### Dependencies: 8.7, 8.8, 8.9
+### Description: Implement additional form enhancements like auto-save drafts, field validation indicators, and submission loading states
+### Details:
+Add loading spinners during submission, visual indicators for field validation status, auto-save draft functionality, and form state persistence across modal close/open cycles.
+

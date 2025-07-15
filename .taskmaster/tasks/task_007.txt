@@ -1,0 +1,77 @@
+# Task ID: 7
+# Title: Create Key Validation System
+# Status: pending
+# Dependencies: 6
+# Priority: medium
+# Description: Implement real-time validation for translation keys including duplicate detection and format validation
+# Details:
+1. Create src/utils/validationUtils.js with validation functions:
+```javascript
+const validateKey = (key, existingKeys) => {
+  const errors = []
+  if (!key || key.trim() === '') errors.push('Key is required')
+  if (existingKeys.includes(key)) errors.push('Key already exists')
+  if (!/^[a-z0-9-]+$/.test(key)) errors.push('Use kebab-case format')
+  return errors
+}
+```
+2. Implement real-time validation in EditableCell component
+3. Add validation error display with tooltips
+4. Create src/components/ValidationMessage.js for error display
+5. Follow naming convention: category-subcategory-item pattern
+6. Add validation for base and locale values (non-empty)
+7. Implement validation state in translation store
+8. Add bulk validation for import operations
+
+# Test Strategy:
+Test key uniqueness validation, format validation follows kebab-case rules, error messages are clear and helpful, validation runs in real-time without performance issues. Test edge cases and special characters.
+
+# Subtasks:
+## 1. Create Core Validation Utility Functions [pending]
+### Dependencies: None
+### Description: Implement comprehensive validation functions for translation keys, values, and formats in a centralized utility module
+### Details:
+Create src/utils/validationUtils.js with functions: validateKey() for key format and uniqueness, validateTranslationValue() for content validation, validateBulkData() for batch operations, and formatValidationErrors() for consistent error messaging. Include regex patterns for kebab-case validation and duplicate detection logic.
+
+## 2. Implement Real-time Validation Integration [pending]
+### Dependencies: 7.1
+### Description: Integrate validation functions into components with real-time feedback and debounced validation triggers
+### Details:
+Add validation hooks to EditableCell and form components with debounced validation (300ms delay). Implement useValidation custom hook for state management. Connect validation to user input events with immediate feedback for critical errors and delayed feedback for format validation.
+
+## 3. Build Error Display Components [pending]
+### Dependencies: 7.1
+### Description: Create reusable components for displaying validation errors with tooltips, inline messages, and form-level error summaries
+### Details:
+Create src/components/ValidationError.js for inline error display, ValidationTooltip.js for hover/focus error details, and ErrorSummary.js for form-level error aggregation. Include proper ARIA attributes for accessibility and consistent styling with error severity levels.
+
+## 4. Implement Validation State Management [pending]
+### Dependencies: 7.1, 7.2
+### Description: Create centralized validation state management system to track validation status across components
+### Details:
+Develop src/hooks/useValidationState.js for managing validation state, error tracking, and validation status. Implement validation context provider for sharing validation state between components. Include methods for clearing errors, batch validation, and validation state persistence.
+
+## 5. Create Bulk Validation Features [pending]
+### Dependencies: 7.1, 7.4
+### Description: Implement validation capabilities for bulk operations including CSV import validation and batch key validation
+### Details:
+Create src/utils/bulkValidationUtils.js with functions for validating CSV data, batch key uniqueness checking, and bulk error reporting. Implement progress tracking for large validation operations and provide detailed validation reports with line-by-line error information.
+
+## 6. Integrate Validation with Form Components [pending]
+### Dependencies: 7.2, 7.3, 7.4
+### Description: Connect validation system to AddTranslationForm and EditableCell components with proper error handling
+### Details:
+Modify AddTranslationForm to use validation hooks and display validation errors. Update EditableCell component to show real-time validation feedback. Implement form submission prevention when validation errors exist and provide clear user guidance for error resolution.
+
+## 7. Add Validation Performance Optimization [pending]
+### Dependencies: 7.4, 7.5
+### Description: Optimize validation performance for large datasets and implement caching mechanisms for validation results
+### Details:
+Implement validation result caching, debounced validation for real-time feedback, and lazy validation for non-critical fields. Add performance monitoring for validation operations and optimize duplicate key checking with efficient data structures like Sets or Maps.
+
+## 8. Create Validation Testing Suite [pending]
+### Dependencies: 7.1, 7.2, 7.3, 7.4, 7.5
+### Description: Develop comprehensive tests for all validation functionality including edge cases and performance scenarios
+### Details:
+Create test files for validationUtils.test.js, validation component tests, and integration tests for real-time validation. Include tests for edge cases like special characters, empty values, duplicate detection, and bulk validation performance. Add accessibility tests for error display components.
+

@@ -1,0 +1,54 @@
+.App {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-header {
+  background-color: var(--secondary-color, #282c34);
+  color: white;
+  padding: 1rem 2rem;
+  text-align: center;
+}
+
+.app-header h1 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.8rem;
+}
+
+.app-header p {
+  margin: 0;
+  font-size: 1rem;
+  opacity: 0.8;
+}
+
+.app-main {
+  flex: 1;
+  padding: 2rem;
+}
+
+.app-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Utility classes for future components */
+.button {
+  background-color: var(--primary-color, #61dafb);
+  color: var(--secondary-color, #282c34);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: opacity 0.2s;
+}
+
+.button:hover {
+  opacity: 0.8;
+}
+
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

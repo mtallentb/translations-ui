@@ -1,0 +1,75 @@
+# Task ID: 5
+# Title: Add Inline Editing Capabilities
+# Status: pending
+# Dependencies: 4
+# Priority: high
+# Description: Implement inline editing functionality for grid cells with immediate validation feedback
+# Details:
+1. Create src/components/EditableCell.js with click-to-edit behavior
+2. Implement edit modes: display, editing, saving states
+3. Add input validation for translation values
+4. Handle Enter to save, Escape to cancel
+5. Implement optimistic updates with rollback capability
+6. Add visual indicators for modified cells (CSS classes)
+7. Create src/hooks/useInlineEdit.js custom hook
+8. Support both text input and textarea for longer translations
+9. Add auto-focus and text selection on edit start
+
+# Test Strategy:
+Test inline editing works for all cell types, validation prevents invalid inputs, keyboard shortcuts function correctly, visual feedback is clear. Test edge cases like empty values and special characters.
+
+# Subtasks:
+## 1. Create Editable Cell Component [pending]
+### Dependencies: None
+### Description: Build the core EditableCell component with click-to-edit behavior and mode switching
+### Details:
+Create src/components/EditableCell.js with display/editing/saving states, click-to-edit functionality, and proper component structure for handling different cell types
+
+## 2. Implement Edit State Management [pending]
+### Dependencies: 5.1
+### Description: Build state management system for tracking edit modes and cell values
+### Details:
+Implement state management for edit modes (display, editing, saving), track original and current values, handle state transitions between modes
+
+## 3. Add Input Validation System [pending]
+### Dependencies: 5.2
+### Description: Create validation logic for translation values during inline editing
+### Details:
+Implement validation rules for translation inputs, handle validation errors, provide real-time feedback during editing, prevent invalid submissions
+
+## 4. Implement Keyboard Handling [pending]
+### Dependencies: 5.2
+### Description: Add keyboard shortcuts and navigation for inline editing
+### Details:
+Handle Enter to save, Escape to cancel, Tab navigation, auto-focus on edit start, text selection behavior, keyboard accessibility
+
+## 5. Build Optimistic Updates System [pending]
+### Dependencies: 5.3, 5.4
+### Description: Implement optimistic updates with rollback capability for smooth UX
+### Details:
+Create optimistic update mechanism, implement rollback on failure, handle concurrent edits, maintain data consistency during updates
+
+## 6. Add Visual Feedback System [pending]
+### Dependencies: 5.2
+### Description: Create visual indicators and feedback for editing states and modifications
+### Details:
+Add CSS classes for modified cells, loading indicators during saves, error state styling, hover effects, focus indicators
+
+## 7. Create useInlineEdit Custom Hook [pending]
+### Dependencies: 5.5, 5.6
+### Description: Build reusable custom hook for inline editing functionality
+### Details:
+Create src/hooks/useInlineEdit.js with edit state management, validation handling, keyboard events, optimistic updates logic
+
+## 8. Implement Input Type Support [pending]
+### Dependencies: 5.7
+### Description: Add support for different input types (text input and textarea)
+### Details:
+Support both text input for short translations and textarea for longer content, auto-resize functionality, proper input selection
+
+## 9. Integrate with Translation Grid [pending]
+### Dependencies: 5.8
+### Description: Connect inline editing components with the main translation grid
+### Details:
+Integrate EditableCell with TranslationGrid component, handle grid updates, maintain row selection, ensure proper data flow
+

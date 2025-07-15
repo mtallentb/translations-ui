@@ -1,0 +1,64 @@
+# Task ID: 2
+# Title: Implement Translation Data Models and State Management
+# Status: pending
+# Dependencies: 1
+# Priority: high
+# Description: Create translation data structures and in-memory state management system following the specified data models
+# Details:
+1. Create src/models/Translation.js with Translation object structure:
+```javascript
+const Translation = {
+  key: string,
+  base: string,
+  locales: { 'en-us': string, 'zh-tw': string, ... },
+  modified: boolean,
+  created: timestamp,
+  updated: timestamp
+}
+```
+2. Implement src/store/translationStore.js using React Context and useReducer
+3. Create AppState structure with translations array, selectedLocale, searchQuery, modifiedKeys Set
+4. Implement reducer actions: ADD_TRANSLATION, UPDATE_TRANSLATION, DELETE_TRANSLATION, SET_LOCALE, SET_SEARCH
+5. Add utility functions for translation manipulation
+6. Create mock data with sample translations for development
+
+# Test Strategy:
+Unit tests for data model validation, state reducer functions, and utility methods. Test state transitions and immutability. Verify mock data loads correctly.
+
+# Subtasks:
+## 1. Create Translation Data Models [pending]
+### Dependencies: None
+### Description: Design and implement the core Translation data structure with proper typing and validation
+### Details:
+Create src/models/Translation.js with Translation object structure including key, base, locales, modified, created, and updated fields. Implement validation functions for data integrity and helper methods for translation manipulation. Define TypeScript interfaces or PropTypes for type safety.
+
+## 2. Set up React Context API Structure [pending]
+### Dependencies: 2.1
+### Description: Establish the Context API foundation for global state management
+### Details:
+Create src/store/TranslationContext.js with React Context setup. Define the context provider component with proper TypeScript types. Set up the context consumer hooks and establish the provider wrapper structure for the application.
+
+## 3. Implement State Reducer Logic [pending]
+### Dependencies: 2.1, 2.2
+### Description: Build the reducer function to handle all state transitions and mutations
+### Details:
+Create src/store/translationReducer.js with comprehensive reducer implementation. Handle actions like ADD_TRANSLATION, UPDATE_TRANSLATION, DELETE_TRANSLATION, SET_SEARCH_QUERY, SET_SELECTED_LOCALE, MARK_MODIFIED, SAVE_CHANGES, CANCEL_CHANGES. Ensure immutable state updates and proper error handling.
+
+## 4. Create Action Creators [pending]
+### Dependencies: 2.3
+### Description: Develop action creator functions for consistent state updates
+### Details:
+Create src/store/actions.js with action creator functions for all reducer actions. Implement async action creators for API calls, batch operations for bulk updates, and validation logic within actions. Include proper error handling and loading states.
+
+## 5. Implement State Utility Functions [pending]
+### Dependencies: 2.1, 2.3
+### Description: Build helper functions for state manipulation and data processing
+### Details:
+Create src/utils/stateUtils.js with utility functions for filtering translations, searching across locales, change detection, data validation, and state normalization. Implement performance-optimized functions for large datasets and memoization where appropriate.
+
+## 6. Generate Mock Data and Initial State [pending]
+### Dependencies: 2.1
+### Description: Create comprehensive mock data for development and testing
+### Details:
+Create src/data/mockTranslations.js with realistic translation data across multiple locales. Generate initial state structure with sample translations, default locale settings, and various modification states. Include edge cases and different data scenarios for thorough testing.
+
