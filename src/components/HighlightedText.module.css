@@ -1,0 +1,29 @@
+.highlight {
+  background-color: #ffeb3b;
+  color: #333;
+  padding: 0 2px;
+  border-radius: 2px;
+  font-weight: 500;
+}
+
+.highlight:focus {
+  outline: 2px solid #ff9800;
+  outline-offset: 1px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .highlight {
+    background-color: #ffff00;
+    color: #000;
+    border: 1px solid #000;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .highlight {
+    background-color: #ffd54f;
+    color: #000;
+  }
+}

@@ -3,31 +3,12 @@
  * Provides helper functions for filtering, searching, and manipulating translation state
  */
 
-import { searchTranslation } from '../models/Translation.js';
+import { memoizedSearchTranslations } from './searchUtils.js';
 
 /**
- * Filters translations based on search query
+ * Filters translations based on search query (optimized with memoization)
  * @param {Array} translations - Array of translation objects
- * @  clearSearchCache,
-};
-
-const stateUtilities = {
-  filterTranslationsBySearch,
-  filterTranslationsByModified,
-  filterTranslationsByEmptyLocale,
-  sortTranslationsByKey,
-  sortTranslationsByUpdated,
-  groupTranslationsByFirstChar,
-  getTranslationStats,
-  findIncompleteTranslations,
-  validateTranslations,
-  mergeTranslationUpdates,
-  createTranslationsBackup,
-  memoizedSearch,
-  clearSearchCache,
-};
-
-export default stateUtilities;rchQuery - Search query string
+ * @param {string} searchQuery - Search query string
  * @returns {Array} Filtered translations
  */
 export const filterTranslationsBySearch = (translations, searchQuery) => {
@@ -35,9 +16,8 @@ export const filterTranslationsBySearch = (translations, searchQuery) => {
     return translations;
   }
 
-  return translations.filter(translation =>
-    searchTranslation(translation, searchQuery.trim())
-  );
+  // Use memoized search for better performance
+  return memoizedSearchTranslations(translations, searchQuery.trim());
 };
 
 /**
