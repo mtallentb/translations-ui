@@ -1,0 +1,32 @@
+name: Simple Test
+
+on:
+  issue_comment:
+    types: [created]
+
+permissions:
+  issues: write
+  contents: read
+
+jobs:
+  test:
+    if: contains(github.event.comment.body, '@openhands')
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Simple Response
+      run: |
+        echo "Comment detected: ${{ github.event.comment.body }}"
+        echo "Issue number: ${{ github.event.issue.number }}"
+        echo "Repository: ${{ github.repository }}"
+        
+    - name: Post Comment
+      uses: actions/github-script@v6
+      with:
+        script: |
+          await github.rest.issues.createComment({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            issue_number: context.issue.number,
+            body: '🤖 **Simple Test Response**\n\nThis is a test of the GitHub Actions workflow responding to @openhands mentions.\n\nWorkflow triggered successfully!'
+          });
