@@ -2,6 +2,8 @@ import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslations, updateTranslationLocale } from '../providers';
 import { filterTranslationsBySearch } from '../utils/stateUtils';
+import { getSearchStats } from '../utils/searchUtils';
+import HighlightedText from './HighlightedText';
 import styles from './TranslationGrid.module.css';
 
 const TranslationGrid = () => {
@@ -12,6 +14,11 @@ const TranslationGrid = () => {
   const filteredTranslations = useMemo(() => {
     return filterTranslationsBySearch(translations, searchQuery);
   }, [translations, searchQuery]);
+
+  // Get search statistics
+  const searchStats = useMemo(() => {
+    return getSearchStats(translations, filteredTranslations, searchQuery);
+  }, [translations, filteredTranslations, searchQuery]);
 
   const handleTranslationChange = (key, locale, value) => {
     dispatch(updateTranslationLocale(key, locale, value));
@@ -38,21 +45,28 @@ const TranslationGrid = () => {
       <div className={styles.header}>
         <h2 className={styles.title}>Translations</h2>
         <div className={styles.stats}>
-          {searchQuery ? (
+          {searchStats.hasQuery ? (
             <span>
-              Showing {filteredTranslations.length} of {translations.length}{' '}
-              translations
+              Showing {searchStats.filtered} of {searchStats.total} translations
+              <span className={styles.searchQuery}>
+                {' '}
+                for "{searchStats.query}"
+              </span>
+              <span className={styles.percentage}>
+                {' '}
+                ({searchStats.percentage}%)
+              </span>
             </span>
           ) : (
-            <span>{translations.length} translations</span>
+            <span>{searchStats.total} translations</span>
           )}
         </div>
       </div>
 
       {filteredTranslations.length === 0 ? (
         <div className={styles.empty}>
-          {searchQuery
-            ? 'No translations match your search.'
+          {searchStats.hasQuery
+            ? `No translations match "${searchStats.query}".`
             : 'No translations found.'}
         </div>
       ) : (
@@ -73,6 +87,7 @@ const TranslationGrid = () => {
                   key={translation.key}
                   translation={translation}
                   selectedLocale={selectedLocale}
+                  searchQuery={searchQuery}
                   onTranslationChange={handleTranslationChange}
                 />
               ))}
@@ -87,9 +102,10 @@ const TranslationGrid = () => {
 const TranslationRow = ({
   translation,
   selectedLocale,
+  searchQuery,
   onTranslationChange,
 }) => {
-  const { key, base, locales, modified } = translation;
+  const { key, base, locales } = translation;
 
   const handleInputChange = (locale, value) => {
     onTranslationChange(key, locale, value);
@@ -102,15 +118,15 @@ const TranslationRow = ({
     locales['zh-tw'].trim() !== '';
 
   return (
-    <tr className={`${styles.row} ${modified ? styles.modified : ''}`}>
+    <tr className={styles.row}>
       <td className={styles.keyCell}>
         <div className={styles.keyText} title={key}>
-          {key}
+          <HighlightedText text={key} searchQuery={searchQuery} />
         </div>
       </td>
       <td className={styles.baseCell}>
         <div className={styles.baseText} title={base}>
-          {base}
+          <HighlightedText text={base} searchQuery={searchQuery} />
         </div>
       </td>
       <td className={styles.localeCell}>
@@ -133,13 +149,10 @@ const TranslationRow = ({
       </td>
       <td className={styles.statusCell}>
         <div className={styles.statusIndicators}>
-          {modified && <span className={styles.modifiedBadge}>Modified</span>}
           {!isComplete && (
             <span className={styles.incompleteBadge}>Incomplete</span>
           )}
-          {isComplete && !modified && (
-            <span className={styles.completeBadge}>Complete</span>
-          )}
+          {isComplete && <span className={styles.completeBadge}>Complete</span>}
         </div>
       </td>
     </tr>
@@ -157,6 +170,7 @@ TranslationRow.propTypes = {
     modified: PropTypes.bool.isRequired,
   }).isRequired,
   selectedLocale: PropTypes.string.isRequired,
+  searchQuery: PropTypes.string,
   onTranslationChange: PropTypes.func.isRequired,
 };
 

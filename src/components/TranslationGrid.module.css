@@ -24,6 +24,16 @@
   font-size: 0.9rem;
 }
 
+.searchQuery {
+  font-weight: 500;
+  color: var(--primary-color, #61dafb);
+}
+
+.percentage {
+  color: #888;
+  font-size: 0.85rem;
+}
+
 .loading,
 .error,
 .empty {
